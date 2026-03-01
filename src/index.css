@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ────────────────────────────────────────────────
+   Custom Variables & Global Styles
+───────────────────────────────────────────────── */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 222.2 47.4% 11.2%; /* Blue-ish primary */
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+
+    /* Custom colors from your theme */
+    --blue-dark: 210 60% 15%;      /* #0D1F33 */
+    --blue-medium: 210 50% 25%;    /* #1E3A5F */
+    --blue-light: 195 70% 45%;     /* #2FA4C7 */
+    --green-success: 152 69% 31%;  /* #4CAF50 */
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85% 97%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+
+    /* Custom dark theme colors */
+    --blue-dark: 210 60% 8%;
+    --blue-medium: 210 50% 15%;
+    --blue-light: 195 70% 55%;
+    --green-success: 152 69% 45%;
+  }
+
+  /* Global smooth scrolling (footer se services tak smooth scroll) */
+  html {
+    scroll-behavior: smooth !important;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* Beautiful modern scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted/50;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/40 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/70;
+  }
+
+  /* Selection highlight */
+  ::selection {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  /* Focus ring improvement */
+  :focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(47, 164, 199, 0.3);
+  }
+}
+
+/* ────────────────────────────────────────────────
+   Custom Components & Utilities
+───────────────────────────────────────────────── */
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 rounded-xl font-heading font-bold text-white transition-all hover:scale-[1.02] hover:shadow-lg;
+    background: linear-gradient(135deg, #1E3A5F, #2FA4C7);
+  }
+
+  .card {
+    @apply bg-card rounded-2xl border border-border shadow-sm hover:shadow-md transition-all duration-300;
+  }
+
+  .section-title {
+    @apply text-center mb-12;
+  }
+
+  .section-heading {
+    @apply font-heading font-extrabold text-3xl md:text-4xl text-foreground mb-4;
+  }
+
+  .section-sub {
+    @apply text-muted-foreground max-w-2xl mx-auto text-lg;
+  }
+}
+
+/* ────────────────────────────────────────────────
+   Custom Utilities (agar zarurat pade to use kar sakte ho)
+───────────────────────────────────────────────── */
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(to right, #1E3A5F, #2FA4C7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .gradient-border {
+    border-image: linear-gradient(to right, #1E3A5F, #2FA4C7) 1;
+  }
+}
