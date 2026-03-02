@@ -930,7 +930,7 @@ function Home() {
               >
                 Get Free Consultation 🚀
               </button>
-              <a href="https://wa.me/919876543210" target="_blank" rel="noreferrer"
+              <a href="https://wa.me/919711565533" target="_blank" rel="noreferrer"
                 className="px-8 py-3.5 rounded-xl font-heading font-bold text-white transition hover:opacity-90 flex items-center gap-2"
                 style={{ background: "#25D366" }}
               >
@@ -945,7 +945,7 @@ function Home() {
       <Modal service={selectedService} onClose={() => setSelectedService(null)} />
 
       {/* Floating WhatsApp */}
-      <a href="https://wa.me/919876543210" target="_blank" rel="noreferrer"
+      <a href="https://wa.me/919711565533" target="_blank" rel="noreferrer"
         className="fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg z-40 transition hover:scale-110"
         style={{ background: "#25D366", boxShadow: "0 4px 20px rgba(37,211,102,0.4)" }}>
         💬

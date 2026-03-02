@@ -213,7 +213,7 @@ function About() {
             Get Free Consultation <ArrowRight size={18} />
           </a>
           <a
-            href="https://wa.me/919876543210"
+            href="https://wa.me/919711565533"
             target="_blank"
             rel="noreferrer"
             className="px-8 py-3 rounded-xl font-bold text-white text-sm bg-[#25D366] hover:opacity-90 transition"
