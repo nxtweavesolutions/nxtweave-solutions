@@ -190,7 +190,7 @@ export default function Footer() {
 
             <li className="flex gap-3 items-center">
               <Mail size={18} className="text-[#2FA4C7] shrink-0" />
-              <span>nxtweavesolutions@gmail.com</span>
+              <span>info@nxtweavesolutions.com</span>
             </li>
           </ul>
         </div>

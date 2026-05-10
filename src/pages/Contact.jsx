@@ -75,7 +75,7 @@ function Contact() {
 
   const contactInfo = [
     { icon: "📞", label: "Phone", value: "+91 97115 65533", href: "tel:+9197115 65533" },
-    { icon: "📧", label: "Email", value: "nxtweavesolutions@gmail.com", href: "mailto:nxtweavesolutions@gmail.com" },
+    { icon: "📧", label: "Email", value: "info@nxtweavesolutions.com", href: "mailto:info@nxtweavesolutions.com" },
     { icon: "📍", label: "Office", value: "Noida, Gautam Buddha Nagar, Uttar Pradesh, 201301", href: null },
     { icon: "⏰", label: "Hours", value: "Mon–Sat: 9:00 AM – 7:00 PM IST", href: null },
   ];
