@@ -1,9 +1,10 @@
 // src/firebase.js
 
 import { initializeApp } from "firebase/app"
-import { getAuth } from "firebase/auth";
+import { getAuth } from "firebase/auth"
 import { getFirestore } from "firebase/firestore"
 
+// 🔥 REAL FIREBASE CONFIG (use this only)
 const firebaseConfig = {
   apiKey: "AIzaSyCSM1CrLSkIBr7pzWcC9BOebOZ-ATj_iKQ",
   authDomain: "nxtweave-solutions.firebaseapp.com",
@@ -15,6 +16,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig)
-export const auth = getAuth(app);
-// 🔥 Initialize Firestore
+
+// 🔐 Auth
+export const auth = getAuth(app)
+
+// 🗄️ Firestore DB
 export const db = getFirestore(app)
