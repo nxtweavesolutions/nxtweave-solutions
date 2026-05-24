@@ -76,8 +76,8 @@ const CONTACT_INFO = [
   {
     icon: "📧",
     label: "Email",
-    value: "contact@nxtweavesolutions.com",
-    href: "mailto:contact@nxtweavesolutions.com",
+    value: "info@nxtweavesolutions.com",
+    href: "mailto:info@nxtweavesolutions.com",
     sub: "We reply within 24 hours",
   },
   {

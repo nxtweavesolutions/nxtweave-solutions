@@ -280,11 +280,11 @@ export default function Footer() {
               </li>
               <li style={{ display: "flex", gap: "12px", alignItems: "center" }}>
                 <Mail size={16} style={{ color: "#2FA4C7", flexShrink: 0 }} />
-                <a href="mailto:nxtweavesolutions@gmail.com"
+                <a href="mailto:info@nxtweavesolutions.com"
                   style={{ fontSize: "0.85rem", color: "#93B5CC", textDecoration: "none", transition: "color 0.2s" }}
                   onMouseOver={(e) => e.currentTarget.style.color = "#fff"}
                   onMouseOut={(e) => e.currentTarget.style.color = "#93B5CC"}>
-                  nxtweavesolutions@gmail.com
+                  info@nxtweavesolutions.com
                 </a>
               </li>
             </ul>
