@@ -342,7 +342,7 @@ and documentation completeness. We are not responsible for any delays caused
 by government departments or third-party agencies. By using our website and
 services, you acknowledge and agree to this disclaimer.
 
-Contact: info@nxtweavesolutions.com
+Contact: contact@nxtweavesolutions.com
 Website: www.nxtweavesolutions.com
 `;
 
@@ -364,14 +364,14 @@ the requested service.
 
 Your Rights
 You may request access to, correction of, or deletion of your personal data
-by contacting us at info@nxtweavesolutions.com.
+by contacting us at contact@nxtweavesolutions.com.
 
 Cookies
 Our website uses cookies and analytics tools to improve user experience and
 understand visitor behaviour. You can manage cookie preferences through your
 browser settings.
 
-Contact: info@nxtweavesolutions.com
+Contact: contact@nxtweavesolutions.com
 Website: www.nxtweavesolutions.com
 `;
 
@@ -412,7 +412,7 @@ Governing Law
 These terms are governed by the laws of India. Disputes shall be subject to
 the jurisdiction of courts in Noida, Uttar Pradesh.
 
-Contact: info@nxtweavesolutions.com
+Contact: contact@nxtweavesolutions.com
 Website: www.nxtweavesolutions.com
 `;
 
@@ -534,7 +534,7 @@ function LegalPage({ title, content }) {
           </Link>
 
           <a
-            href="mailto:info@nxtweavesolutions.com"
+            href="mailto:contact@nxtweavesolutions.com"
             style={{
               display:       "inline-flex",
               alignItems:    "center",

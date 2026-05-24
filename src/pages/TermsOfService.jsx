@@ -143,7 +143,7 @@ function LegalLayout({ title, subtitle, icon, children }) {
             </Link>
 
             <a
-              href="mailto:info@nxtweavesolutions.com"
+              href="mailto:contact@nxtweavesolutions.com"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -388,7 +388,7 @@ export default function TermsOfService() {
 
       <Section number="5" title="Contact">
         <Para>
-          📩 info@nxtweavesolutions.com
+          📩 contact@nxtweavesolutions.com
           <br />
           🌐 www.nxtweavesolutions.com
         </Para>

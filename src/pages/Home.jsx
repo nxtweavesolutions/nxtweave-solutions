@@ -262,7 +262,7 @@ function PopupForm({ onClose }) {
             <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.75rem", marginBottom: "8px" }}>Connect with us</p>
             <div style={{ display: "flex", gap: "12px" }}>
               {[
-                { label: "WhatsApp", href: "https://wa.me/919711565533", color: "#25D366" },
+                { label: "WhatsApp", href: "https://wa.me/919999999999", color: "#25D366" },
                 { label: "Instagram", href: "https://www.instagram.com/nxtweavesolutions/", color: "#E1306C" },
                 { label: "LinkedIn", href: "https://www.linkedin.com/company/nxtweavesolutions/", color: "#0A66C2" },
               ].map((s) => (
@@ -840,7 +840,7 @@ function Home() {
                     onMouseOut={(e) => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 4px 20px rgba(76,175,80,0.4)"; }}>
                     Get Free Consultation
                   </button>
-                  <a href="https://wa.me/919711565533" target="_blank" rel="noreferrer"
+                  <a href="https://wa.me/919999999999" target="_blank" rel="noreferrer"
                     style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "14px 28px", borderRadius: "50px", background: "rgba(37,211,102,0.15)", border: "1px solid rgba(37,211,102,0.35)", color: "#4ade80", fontWeight: 600, fontSize: "0.88rem", textDecoration: "none", transition: "all 0.3s" }}
                     onMouseOver={(e) => { e.currentTarget.style.background = "rgba(37,211,102,0.25)"; }}
                     onMouseOut={(e) => { e.currentTarget.style.background = "rgba(37,211,102,0.15)"; }}>
@@ -1055,7 +1055,7 @@ function Home() {
                 onMouseOut={(e) => e.currentTarget.style.transform = "none"}>
                 Get Free Consultation
               </button>
-              <a href="https://wa.me/919711565533" target="_blank" rel="noreferrer"
+              <a href="https://wa.me/919999999999" target="_blank" rel="noreferrer"
                 style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "14px 32px", borderRadius: "50px", background: "#25D366", color: "#fff", fontWeight: 700, fontSize: "0.95rem", textDecoration: "none", boxShadow: "0 4px 20px rgba(37,211,102,0.35)", transition: "all 0.3s" }}
                 onMouseOver={(e) => e.currentTarget.style.transform = "translateY(-2px)"}
                 onMouseOut={(e) => e.currentTarget.style.transform = "none"}>
@@ -1071,7 +1071,7 @@ function Home() {
       {showPopup && <PopupForm onClose={handlePopupClose} />}
 
       {/* Floating WhatsApp */}
-      <a href="https://wa.me/919711565533" target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp"
+      <a href="https://wa.me/919999999999" target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp"
         style={{
           position: "fixed", bottom: "24px", right: "24px", width: "52px", height: "52px",
           borderRadius: "50%", background: "#25D366", display: "flex", alignItems: "center", justifyContent: "center",

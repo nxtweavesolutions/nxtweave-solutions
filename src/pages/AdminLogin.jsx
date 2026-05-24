@@ -12,7 +12,7 @@ export default function AdminLogin() {
 
   const navigate = useNavigate();
 
-  const ADMIN_EMAIL = "info@nxtweavesolutions.com"; // 🔐 Your admin email
+  const ADMIN_EMAIL = "contact@nxtweavesolutions.com"; // 🔐 Your admin email
 
   const handleLogin = async (e) => {
     e.preventDefault();

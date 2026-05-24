@@ -12,7 +12,7 @@ const EMAILJS = {
 };
 
 const SOCIAL = {
-  whatsapp:  "https://wa.me/919711565533",
+  whatsapp:  "https://wa.me/919999999999",
   instagram: "https://www.instagram.com/nxtweavesolutions/",
   linkedin:  "https://www.linkedin.com/company/nxtweavesolutions/",
 };
@@ -70,14 +70,14 @@ const CONTACT_INFO = [
     icon: "📞",
     label: "Phone",
     value: "+91 97115 65533",
-    href: "tel:+919711565533",
+    href: "tel:+919999999999",
     sub: "Mon–Sat, 9 AM – 7 PM IST",
   },
   {
     icon: "📧",
     label: "Email",
-    value: "info@nxtweavesolutions.com",
-    href: "mailto:info@nxtweavesolutions.com",
+    value: "contact@nxtweavesolutions.com",
+    href: "mailto:contact@nxtweavesolutions.com",
     sub: "We reply within 24 hours",
   },
   {
