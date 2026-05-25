@@ -2444,7 +2444,7 @@ function Home() {
       </section>
 
       {/* ─── DYNAMIC GOVERNMENT SCHEME BANNER ─── */}
-      <section style={{ padding: "80px 0", background: "linear-gradient(135deg,#1E3A5F,#1a5a82)" }}>
+      <section id="schemes-section" style={{ padding: "80px 0", background: "linear-gradient(135deg,#1E3A5F,#1a5a82)" }}>
         <div style={{ maxWidth: "800px", margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
           <FadeUp>
             <span style={{ display: "inline-flex", alignItems: "center", gap: "8px", color: "rgba(255,255,255,0.7)",

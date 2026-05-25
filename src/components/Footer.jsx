@@ -114,7 +114,7 @@ export default function Footer() {
     { label: "Certifications", action: () => goToServicesTab("certifications") },
     { label: "Digital Solutions", action: () => goToServicesTab("digital") },
     { label: "Digital Marketing", action: () => goToServicesTab("marketing") },
-    { label: "Government Schemes", action: () => handleScroll("checklist") },
+    { label: "Government Schemes", action: () => handleScroll("schemes-section") },
   ];
 
   const legalLinks = [
