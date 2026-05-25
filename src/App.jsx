@@ -255,6 +255,9 @@ function NotFound() {
 
 // ─── App ──────────────────────────────────────────────────────────────────────
 function App() {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin") || location.pathname.startsWith("/dashboard");
+
   return (
     <div
       style={{
@@ -271,7 +274,7 @@ function App() {
       <ScrollToTop />
 
       {/* ── Navbar ─────────────────────────────────────────────────────── */}
-      <Navbar />
+      {!isAdminRoute && <Navbar />}
 
       {/* ── Main content ───────────────────────────────────────────────── */}
       <main style={{ flex: 1 }}>
@@ -306,7 +309,7 @@ function App() {
       </main>
 
       {/* ── Footer ─────────────────────────────────────────────────────── */}
-      <Footer />
+      {!isAdminRoute && <Footer />}
     </div>
   );
 }

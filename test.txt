@@ -1,0 +1,96 @@
+<USER_REQUEST>
+// src/pages/Home.jsx  —  NxtWeave Solutions  (merged final)
+import { useEffect, useRef, useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import emailjs from "@emailjs/browser";
+
+// ─── Brand Config ─────────────────────────────────────────────────────────────
+const SOCIAL = {
+  whatsapp:  "https://wa.me/919711565533",
+  instagram: "https://www.instagram.com/nxtweavesolutions/",
+  facebook:  "https://www.facebook.com/profile.php?id=61577122554991",
+  linkedin:  "https://www.linkedin.com/company/nxtweavesolutions/",
+};
+
+const C = {
+  navy:   "#1E3A5F",
+  dark:   "#0D1F33",
+  teal:   "#2FA4C7",
+  green:  "#4CAF50",
+  bg:     "#F4F8FB",
+  white:  "#FFFFFF",
+  muted:  "#556B7D",
+  border: "#e0e9f2",
+};
+
+const EMAILJS = {
+  service:  "service_8mzileq",
+  template: "template_d8xpqpo",
+  key:      "ikS9R1hqeGZXmqe-f",
+};
+
+// ─── Global CSS ───────────────────────────────────────────────────────────────
+const GLOBAL_CSS = `
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap');
+  @keyframes nwWaPulse {
+    0%,100%{box-shadow:0 4px 20px rgba(37,211,102,0.45)}
+    50%{box-shadow:0 4px 32px rgba(37,211,102,0.7),0 0 0 8px rgba(37,211,102,0.12)}
+  }
+  @keyframes shimmerGold {
+    0%{background-position:-200% center}
+    100%{background-position:200% center}
+  }
+  @keyframes popupIn {
+    from{opacity:0;transform:translateY(20px) scale(0.97)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+  }
+  .nw-popup-grid { display:grid; grid-template-columns:1fr 1fr; }
+  @media(max-width:640px){
+    .nw-popup-grid { grid-template-columns:1fr !important
+<truncated 45215 bytes>
+lur(16px)",
+              padding:"18px 22px", borderRadius:"14px",
+              border:"1px solid rgba(255,255,255,0.2)" }}>
+              <h3 style={{ fontFamily:"'Playfair Display',serif",
+                color:"#fff", fontWeight:700,
+                fontSize:"1rem", marginBottom:"3px" }}>End-to-End Support</h3>
+              <p style={{ color:"rgba(255,255,255,0.78)",
+                fontSize:"0.78rem", fontWeight:300 }}>
+                From registration to digital scaling — we handle it all.</p>
+            </div>
+          </div>
+        </FadeUp>
+      </div>
+    </section>
+  );
+}
+
+// ─── Testimonials section ─────────────────────────────────────────────────────
+function TestimonialsSection() {
+  return (
+    <section id="testimonials-section"
+      style={{ padding:"80px 0", background:"#fff" }}>
+      <div style={{ maxWidth:"1280px", margin:"0 auto", padding:"0 24px" }}>
+        <FadeUp>
+          <SectionTitle title="Real Businesses. Real Results."
+            sub="Trusted by clients across India and internationally." />
+        </FadeUp>
+        <div className="nw-testi-grid"
+          style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:"18px" }}>
+          {TESTIMONIALS.map((t, i) => (
+            <FadeUp key={i} delay={i*70}>
+              <div style={{ background:C.bg, padding:"24px",
+                borderRadius:"20px", border:`1px solid ${C.border}`,
+                height:"100%", display:"flex", flexDirection:"column",
+                transition:"all 0.3s" }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.boxShadow="0 8px 28px rgba(47,164,199,0.12)";
+                  e.currentTarget.style.borderColor=C.teal;
+                }}
+                onMouseOut={(e) => {
+                  
+<truncated 29784 bytes>
+
+NOTE: The output was truncated because it was too long. Use a more targeted query or a smaller range to get the information you need.
