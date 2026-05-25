@@ -340,10 +340,30 @@ export default function TermsOfService() {
     >
       <Para>
         By using NxtWeave Solutions services or website, you agree to the
-        following terms and conditions.
+        following terms and conditions. Please read these terms carefully before
+        initiating any project, as they outline mutual covenants, billing policies, and legal boundaries.
       </Para>
 
       <Section number="1" title="Services">
+        <Para>
+          NxtWeave Solutions provides a highly specialized and comprehensive suite of professional business
+          consulting, startup incubation assistance, administrative compliance structuring, corporate formation
+          coaching, digital marketing strategy, visual branding, and customized web and software engineering solutions.
+          By utilizing our platforms, subscribing to our services, or contracting our administrative assistance, the client
+          explicitly acknowledges that all services are executed on a professional best-efforts basis. NxtWeave
+          Solutions combines deep industry experience with robust technical resources to facilitate administrative
+          filings, manage brand identities, and engineer modern software systems. However, we do not issue any
+          guarantees, warranties, or promises that our work will result in specific marketing gains, immediate
+          search engine ranking improvements, traffic increases, or financial return benchmarks. We reserve the
+          absolute and unilateral right to modify, adjust, enhance, or temporarily suspend any of our packages,
+          service tiers, interactive web utilities, or professional pricing schedules at our sole discretion, without
+          prior notice, provided that ongoing client projects under active, signed, and fully paid-up contracts are
+          executed and fulfilled in strict accordance with their respective mutually agreed written agreements. Our
+          services do not include providing legal representation in litigation, certified public audits, or formal
+          corporate liquidations. NxtWeave Solutions operates strictly as a corporate and digital growth consulting
+          entity, and our deliverable timelines are governed by mutual schedules and milestone authorizations.
+        </Para>
+
         <BulletList
           items={[
             "Business registration and compliance services",
@@ -355,6 +375,25 @@ export default function TermsOfService() {
       </Section>
 
       <Section number="2" title="Client Responsibilities">
+        <Para>
+          The efficient, lawful, and successful execution of any corporate service, brand design, or compliance
+          registration by NxtWeave Solutions is fundamentally contingent upon the prompt, complete, honest, and
+          active cooperation of the client. Clients are strictly obligated to furnish all required corporate
+          documents, identification papers, statutory signatures, corporate resolutions, and operational details in
+          a highly timely and legally valid manner. It is the client’s sole, exclusive, and non-delegable
+          responsibility to ensure that all information, declarations, and files supplied to our team are completely
+          accurate, genuine, up-to-date, and free from any fraudulent, forged, or misleading details. NxtWeave
+          Solutions shall not be held liable, accountable, or legally responsible for any delays, rejections,
+          regulatory queries, administrative penalties, or legal prosecutions resulting from delayed client
+          submissions, missing authorization signatures, or inaccurate documentation. Furthermore, clients are
+          strictly obligated to ensure that their use of our branding designs, custom software products, and
+          compliance roadmaps complies in full with all local, state, federal, and international regulations. Any
+          unauthorized use of our engineered products, system databases, or corporate intellectual property for
+          unlawful activities, including fraud, system manipulation, or regulatory circumvention, will result in the
+          immediate and unilateral termination of our service agreements, without any professional fee refunds, and
+          may be reported to competent law enforcement bodies.
+        </Para>
+
         <BulletList
           items={[
             "Provide accurate information and documents",
@@ -367,8 +406,21 @@ export default function TermsOfService() {
 
       <Section number="3" title="Payments">
         <Para>
-          Professional fees and government charges must be paid as agreed before
-          or during project execution.
+          Clients agree to pay all professional consulting fees, service charges, subscription costs, and statutory
+          government deposits in strict accordance with the billing schedule established prior to project
+          commencement. NxtWeave Solutions operates as a professional administrative intermediary when executing filings
+          on public portals; therefore, all statutory government fees, registration taxes, duties, and official
+          processing charges are immediately non-refundable once they have been submitted to the respective public
+          portals, departments, or municipal registries. This policy remains absolute regardless of whether the
+          filing is subsequently approved, delayed, queried, or rejected by the regulatory authorities. Our
+          professional consulting fees are calculated based on intensive resource allocation, technical analysis,
+          and labor hours, and are non-refundable once work has commenced. Payments must be processed through our
+          authorized payment gateways or designated corporate bank accounts. Late payments or payment defaults shall
+          result in the immediate suspension of all services, filing activities, and website hosting until all
+          outstanding balances are settled. Any disputed invoices must be brought to our attention in writing within
+          ten (10) business days of issuance, failing which they shall be deemed accepted and valid. NxtWeave Solutions
+          reserves the right to charge interest on all overdue payments at a rate of 1.5% per month, calculated daily,
+          or the maximum rate permitted by law.
         </Para>
 
         <InfoBox type="warning">
@@ -377,6 +429,23 @@ export default function TermsOfService() {
       </Section>
 
       <Section number="4" title="Limitation of Liability">
+        <Para>
+          Under no circumstances shall NxtWeave Solutions, its founders, directors, corporate officers, employees, or
+          authorized agents be held liable to the client or any third party for any indirect, incidental, special,
+          consequential, exemplary, or punitive damages. This includes, but is not limited to, losses arising from
+          operational delays, corporate rejections, government portal server outages, database downtime, statutory
+          updates, policy changes, or requests for clarification issued by regulatory bodies. The client explicitly
+          agrees that our aggregate liability for any and all claims, disputes, or legal actions arising under these
+          terms, our privacy policies, or the actual professional services rendered shall be strictly capped and shall
+          not, under any circumstances, exceed the total professional fee actually paid by the client to NxtWeave
+          Solutions for that specific service during the preceding three-month period. We disclaim all implied
+          warranties, including merchantability, fitness for a particular purpose, and non-infringement. Any
+          disruptions caused by natural disasters, national emergencies, infrastructure failures, or government portal
+          collapses shall be treated as force majeure events. The client acknowledges that this limitation is a
+          fundamental element of the bargain between the parties, and that NxtWeave Solutions would be unable to
+          provide these premium services at the stated price points without such robust and clear liability limits.
+        </Para>
+
         <BulletList
           items={[
             "We do not guarantee government approvals",
@@ -388,6 +457,22 @@ export default function TermsOfService() {
 
       <Section number="5" title="Contact">
         <Para>
+          These terms of service, our privacy policies, and any business relationships or disputes arising from or
+          relating to our corporate operations shall be governed by, construed, and enforced in accordance with the
+          applicable laws of our operating jurisdiction, without giving effect to any principles of conflict of laws.
+          Any formal legal actions, lawsuits, or judicial proceedings must be initiated exclusively in the competent
+          courts located at our corporate headquarters. Before initiating any formal legal actions, filings, or public
+          arbitrations, the client explicitly agrees to engage in good-faith, bilateral negotiations with the management
+          of NxtWeave Solutions for a minimum period of thirty (30) business days. For any formal notifications, legal
+          notices of dispute, or requests for terms clarification, please contact our legal and compliance department
+          via the official email provided on this website. Our team will review all documented correspondence and
+          endeavor to reach a constructive, amicable resolution. If any provision of these terms is found by a court
+          of competent jurisdiction to be invalid or unenforceable, the remaining provisions shall continue in full force
+          and effect. No waiver of any term or condition shall be deemed a further or continuing waiver of such term or
+          any other condition.
+        </Para>
+
+        <Para style={{ marginTop: "18px", fontWeight: "bold", color: "#1E3A5F" }}>
           📩 info@nxtweavesolutions.com
           <br />
           🌐 www.nxtweavesolutions.com
