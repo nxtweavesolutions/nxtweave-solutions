@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { collection, addDoc }          from "firebase/firestore";
 import { db }                          from "../firebase";
 import emailjs                         from "@emailjs/browser";
+import { validateContactForm }         from "../utils/validation";
 
 // ─── Config ───────────────────────────────────────────────────────────────────
 const EMAILJS = {
@@ -127,6 +128,14 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+
+    // Run strict enterprise validation
+    const validation = validateContactForm(form);
+    if (!validation.isValid) {
+      setError(validation.error);
+      return;
+    }
+
     setLoading(true);
 
     try {

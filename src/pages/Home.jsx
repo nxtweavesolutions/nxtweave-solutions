@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import emailjs from "@emailjs/browser";
+import { validateContactForm } from "../utils/validation";
 
 // ─── Brand Config ─────────────────────────────────────────────────────────────
 const SOCIAL = {
@@ -571,9 +572,10 @@ function ServiceModal({ service, onClose }) {
   const [form, setForm]     = useState({ name: "", phone: "", email: "", message: "" });
   const [sent, setSent]     = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError]     = useState("");
 
   useEffect(() => {
-    if (service) { setForm({ name: "", phone: "", email: "", message: "" }); setSent(false); }
+    if (service) { setForm({ name: "", phone: "", email: "", message: "" }); setSent(false); setError(""); }
     const esc = (e) => { if (e.key === "Escape") onClose(); };
     if (service) window.addEventListener("keydown", esc);
     return () => window.removeEventListener("keydown", esc);
@@ -583,6 +585,14 @@ function ServiceModal({ service, onClose }) {
 
   const submit = async (e) => {
     e.preventDefault();
+    setError("");
+
+    const validation = validateContactForm({ ...form, service: service.title });
+    if (!validation.isValid) {
+      setError(validation.error);
+      return;
+    }
+
     setLoading(true);
     try {
       await emailjs.send(EMAILJS.service, EMAILJS.template, {
@@ -594,7 +604,7 @@ function ServiceModal({ service, onClose }) {
         source: "service-modal", status: "pending", createdAt: new Date(),
       });
       setSent(true);
-    } catch { alert("Something went wrong. Please try again."); }
+    } catch { setError("Something went wrong. Please try again."); }
     setLoading(false);
   };
 
@@ -682,6 +692,15 @@ function ServiceModal({ service, onClose }) {
               <h4 style={{ fontFamily: "'Playfair Display', serif",
                 color: C.navy, fontWeight: 700, fontSize: "1rem",
                 marginBottom: "2px" }}>Request Free Consultation</h4>
+              {error && (
+                <div style={{
+                  background: "#FEF2F2", border: "1px solid #FECACA",
+                  borderRadius: "10px", padding: "10px 12px",
+                  color: "#DC2626", fontSize: "0.78rem", fontWeight: 600
+                }}>
+                  ⚠️ {error}
+                </div>
+              )}
               {[["name", "Full Name", "text"], ["phone", "Phone Number", "tel"],
                 ["email", "Email Address", "email"]].map(([k, ph, t]) => (
                 <input key={k} required type={t} placeholder={ph} value={form[k]}
@@ -717,9 +736,18 @@ function PopupForm({ onClose }) {
   const [form, setForm]       = useState({ name: "", phone: "", email: "", service: "", message: "" });
   const [sent, setSent]       = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError]     = useState("");
 
   const submit = async (e) => {
     e.preventDefault();
+    setError("");
+
+    const validation = validateContactForm(form);
+    if (!validation.isValid) {
+      setError(validation.error);
+      return;
+    }
+
     setLoading(true);
     try {
       await emailjs.send(EMAILJS.service, EMAILJS.template, {
@@ -731,7 +759,7 @@ function PopupForm({ onClose }) {
         ...form, source: "popup", status: "pending", createdAt: new Date(),
       });
       setSent(true);
-    } catch { alert("Something went wrong. Please try again."); }
+    } catch { setError("Something went wrong. Please try again."); }
     setLoading(false);
   };
 
@@ -939,6 +967,15 @@ function PopupForm({ onClose }) {
               <form onSubmit={submit}
                 style={{ display: "flex", flexDirection: "column", gap: "12px" }}
                 className="nw-li">
+                {error && (
+                  <div style={{
+                    background: "#FEF2F2", border: "1px solid #FECACA",
+                    borderRadius: "10px", padding: "10px 12px",
+                    color: "#DC2626", fontSize: "0.78rem", fontWeight: 600
+                  }}>
+                    ⚠️ {error}
+                  </div>
+                )}
                 {[["name", "Full Name", "text"], ["phone", "Phone Number", "tel"],
                   ["email", "Email Address", "email"]].map(([k, ph, t]) => (
                   <input key={k} required type={t} placeholder={ph} value={form[k]}
@@ -1254,6 +1291,7 @@ function Home() {
   const [form, setForm]       = useState({ name: "", phone: "", email: "", service: "", message: "" });
   const [sent, setSent]       = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError]     = useState("");
 
   // Dynamic modules states
   const [selectedService, setSelectedService] = useState(null);
@@ -1299,6 +1337,14 @@ function Home() {
   // Bottom form submit
   const submitStrategySession = async (e) => {
     e.preventDefault();
+    setError("");
+
+    const validation = validateContactForm(form);
+    if (!validation.isValid) {
+      setError(validation.error);
+      return;
+    }
+
     setLoading(true);
     try {
       await emailjs.send(EMAILJS.service, EMAILJS.template, {
@@ -1310,9 +1356,10 @@ function Home() {
         ...form, source: "bottom-booking", status: "pending", createdAt: new Date(),
       });
       setSent(true);
+      setError("");
     } catch (err) {
       console.error(err);
-      alert("Something went wrong. Please try again.");
+      setError("Something went wrong. Please try again.");
     }
     setLoading(false);
   };
@@ -2582,6 +2629,16 @@ function Home() {
                     <p style={{ color: C.muted, fontSize: "0.78rem", marginBottom: "12px", fontWeight: 300 }}>
                       Enter your details below and our corporate consultant will call you back.
                     </p>
+
+                    {error && (
+                      <div style={{
+                        background: "#FEF2F2", border: "1px solid #FECACA",
+                        borderRadius: "10px", padding: "10px 12px",
+                        color: "#DC2626", fontSize: "0.78rem", fontWeight: 600
+                      }}>
+                        ⚠️ {error}
+                      </div>
+                    )}
 
                     <input required type="text" id="contact-name" placeholder="Your Full Name *" value={form.name}
                       onChange={(e) => setForm(p => ({ ...p, name: e.target.value }))}

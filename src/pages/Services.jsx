@@ -5,6 +5,7 @@ import { useSearchParams, useNavigate }             from "react-router-dom";
 import { collection, addDoc }                       from "firebase/firestore";
 import { db }                                       from "../firebase";
 import emailjs                                      from "@emailjs/browser";
+import { validateContactForm }                      from "../utils/validation";
 
 // ─── Color Config ────────────────────────────────────────────────────────────
 const C = {
@@ -357,6 +358,13 @@ function ServiceModal({ service, onClose }) {
   const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
     setError("");
+
+    const validation = validateContactForm({ ...form, service: service?.title });
+    if (!validation.isValid) {
+      setError(validation.error);
+      return;
+    }
+
     setLoading(true);
     try {
       await emailjs.send(EMAILJS.service, EMAILJS.template, {
