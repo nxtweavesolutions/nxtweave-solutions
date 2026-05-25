@@ -130,7 +130,7 @@ export default function Contact() {
     setError("");
 
     // Run strict enterprise validation
-    const validation = validateContactForm(form);
+    const validation = await validateContactForm(form);
     if (!validation.isValid) {
       setError(validation.error);
       return;

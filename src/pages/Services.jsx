@@ -359,7 +359,7 @@ function ServiceModal({ service, onClose }) {
     e.preventDefault();
     setError("");
 
-    const validation = validateContactForm({ ...form, service: service?.title });
+    const validation = await validateContactForm({ ...form, service: service?.title });
     if (!validation.isValid) {
       setError(validation.error);
       return;

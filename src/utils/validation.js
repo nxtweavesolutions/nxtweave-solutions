@@ -3,13 +3,13 @@
 
 /**
  * Validates the contact form input details strictly to prevent spam, empty submissions, and dummy data.
- * Supports name syntax, strict email verification, domain typo checking, phone formatting, 
- * repetitive/sequential spam mitigation, and minimum query character thresholds.
+ * Performs live DNS verification via Google DNS-over-HTTPS (DoH) to check if the domain exists
+ * and has active email server (MX) or address (A) records.
  * 
  * @param {Object} data - The form data containing { name, email, phone, message, service }
- * @returns {Object} { isValid: boolean, error: string }
+ * @returns {Promise<Object>} { isValid: boolean, error: string }
  */
-export function validateContactForm({ name, email, phone, message, service }) {
+export async function validateContactForm({ name, email, phone, message, service }) {
   // 1. Name Validation
   if (!name || String(name).trim().length < 2) {
     return { isValid: false, error: "Please enter your full name (minimum 2 characters)." };
@@ -37,7 +37,7 @@ export function validateContactForm({ name, email, phone, message, service }) {
   // Specific list of dummy or fake domains identified in testing
   const dummyDomains = [
     "test.com", "example.com", "xyz.com", "abc.com", "lest.com", 
-    "gmaise.com", "temp.com", "mailinator.com", "demo.com", "fake.com"
+    "temp.com", "mailinator.com", "demo.com", "fake.com"
   ];
   if (dummyDomains.includes(domain)) {
     return { isValid: false, error: `The email domain '@${domain}' is invalid or blocked. Please provide an active, genuine email.` };
@@ -61,6 +61,41 @@ export function validateContactForm({ name, email, phone, message, service }) {
   };
   if (commonTypos[domain]) {
     return { isValid: false, error: `Did you mean '@${commonTypos[domain]}'? Please verify your email domain spelling.` };
+  }
+
+  // Live DNS check for actual active Mail Exchanger (MX) records
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3500); // 3.5s timeout for fast responses
+
+    const response = await fetch(`https://dns.google/resolve?name=${domain}&type=MX`, {
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+
+    if (response.ok) {
+      const dnsJson = await response.json();
+      
+      // Google DNS Status: 3 means NXDOMAIN (Domain does not exist)
+      if (dnsJson.Status === 3) {
+        return { isValid: false, error: `The domain '@${domain}' does not exist or has no active servers. Please check for spelling typos.` };
+      }
+      
+      // If domain exists but doesn't have MX records (it cannot receive emails)
+      if (!dnsJson.Answer || dnsJson.Answer.length === 0) {
+        // Fallback check: check if it has a valid A record (web server)
+        const aResponse = await fetch(`https://dns.google/resolve?name=${domain}&type=A`);
+        if (aResponse.ok) {
+          const aJson = await aResponse.json();
+          if (!aJson.Answer || aJson.Answer.length === 0) {
+            return { isValid: false, error: `The domain '@${domain}' has no active mail server or web records. Please use a valid email.` };
+          }
+        }
+      }
+    }
+  } catch (dnsErr) {
+    // If the DNS query fails or times out, bypass this check gracefully so the form submission doesn't break.
+    console.warn("[Validation] DNS verify failed or timed out, bypassing live check:", dnsErr);
   }
 
   // 3. Phone / Contact Number Validation

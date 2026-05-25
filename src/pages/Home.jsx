@@ -587,7 +587,7 @@ function ServiceModal({ service, onClose }) {
     e.preventDefault();
     setError("");
 
-    const validation = validateContactForm({ ...form, service: service.title });
+    const validation = await validateContactForm({ ...form, service: service.title });
     if (!validation.isValid) {
       setError(validation.error);
       return;
@@ -742,7 +742,7 @@ function PopupForm({ onClose }) {
     e.preventDefault();
     setError("");
 
-    const validation = validateContactForm(form);
+    const validation = await validateContactForm(form);
     if (!validation.isValid) {
       setError(validation.error);
       return;
@@ -1339,7 +1339,7 @@ function Home() {
     e.preventDefault();
     setError("");
 
-    const validation = validateContactForm(form);
+    const validation = await validateContactForm(form);
     if (!validation.isValid) {
       setError(validation.error);
       return;
