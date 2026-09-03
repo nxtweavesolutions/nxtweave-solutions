@@ -13,6 +13,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Shadcn-compat colors
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -53,13 +54,33 @@ export default {
           4: "hsl(var(--chart-4))",
           5: "hsl(var(--chart-5))",
         },
+
+        // NxtWeave Premium Enterprise Tokens
+        "primary-navy": "#0B1F3A",
+        "dark-navy": "#06152B",
+        "royal-blue": "#1D4ED8",
+        "premium-blue": "#2563EB",
+        "accent-cyan": "#06B6D4",
+        "brand-success": "#16A34A",
+        "brand-warning": "#F59E0B",
+        "brand-danger": "#DC2626",
+        "bg-slate-primary": "#FFFFFF",
+        "bg-slate-secondary": "#F8FAFC",
+        "bg-slate-alternate": "#F1F5F9",
+        "bg-slate-highlight": "#EFF6FF",
+        "text-slate-primary": "#0F172A",
+        "text-slate-secondary": "#1E293B",
+        "text-slate-paragraph": "#334155",
+        "text-slate-light": "#475569",
       },
 
       fontFamily: {
         playfair: ["'Playfair Display'", "serif"],
         dm: ["'DM Sans'", "sans-serif"],
-        heading: ["Montserrat", "sans-serif"],
+        heading: ["'Plus Jakarta Sans'", "sans-serif"],
         body: ["Inter", "sans-serif"],
+        display: ["'Plus Jakarta Sans'", "sans-serif"],
+        sans: ["Inter", "sans-serif"],
       },
 
       borderRadius: {

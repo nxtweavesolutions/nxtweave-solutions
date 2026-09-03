@@ -10,153 +10,33 @@ function LegalLayout({ title, subtitle, icon, children }) {
   }, []);
 
   return (
-    <div
-      style={{
-        fontFamily: "'DM Sans',sans-serif",
-        minHeight: "100vh",
-        background: "#F4F8FB",
-      }}
-    >
-      {/* Hero */}
-      <section
-        style={{
-          background:
-            "linear-gradient(135deg,#0D1F33 0%,#1E3A5F 60%,#1a4a73 100%)",
-          padding: "110px 24px 64px",
-          textAlign: "center",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            top: "-60px",
-            right: "-60px",
-            width: "320px",
-            height: "320px",
-            borderRadius: "50%",
-            background:
-              "radial-gradient(circle,rgba(47,164,199,0.1),transparent 70%)",
-          }}
-        />
-
-        <div style={{ fontSize: "2.8rem", marginBottom: "14px" }}>
-          {icon}
+    <div className="bg-bg-slate-secondary min-h-screen text-slate-800 font-sans relative overflow-hidden">
+      {/* Hero Header */}
+      <section className="relative pt-32 pb-20 bg-gradient-to-br from-[#0B1F3A] via-[#0F2E5F] to-[#1D4ED8] text-white text-center">
+        <div className="absolute inset-0 dark-dotted-grid opacity-25" />
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="text-4xl mb-4">{icon}</div>
+          <span className="nw-badge mb-4 !bg-white/10 !border-white/20 !text-cyan-300">Legal Center</span>
+          <h1 className="text-3xl md:text-4xl font-black font-display uppercase tracking-tight mb-4">
+            {title}
+          </h1>
+          <p className="text-xs text-blue-100/70 max-w-xl mx-auto font-medium leading-relaxed">
+            {subtitle}
+          </p>
         </div>
-
-        <div
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "8px",
-            padding: "5px 16px",
-            borderRadius: "50px",
-            background: "rgba(47,164,199,0.12)",
-            border: "1px solid rgba(47,164,199,0.28)",
-            color: "#2FA4C7",
-            fontSize: "0.65rem",
-            fontWeight: 700,
-            letterSpacing: "2px",
-            textTransform: "uppercase",
-            marginBottom: "14px",
-          }}
-        >
-          Legal
-        </div>
-
-        <h1
-          style={{
-            fontFamily: "'Playfair Display',serif",
-            fontWeight: 900,
-            fontSize: "clamp(1.8rem,4vw,2.8rem)",
-            color: "#fff",
-            lineHeight: 1.15,
-            marginBottom: "12px",
-          }}
-        >
-          {title}
-        </h1>
-
-        <p
-          style={{
-            color: "rgba(255,255,255,0.5)",
-            fontSize: "0.88rem",
-            maxWidth: "500px",
-            margin: "0 auto",
-            lineHeight: 1.75,
-            fontWeight: 300,
-          }}
-        >
-          {subtitle}
-        </p>
       </section>
 
-      {/* Content */}
-      <div
-        style={{
-          maxWidth: "820px",
-          margin: "0 auto",
-          padding: "48px 24px 80px",
-        }}
-      >
-        <div
-          style={{
-            background: "#fff",
-            borderRadius: "24px",
-            padding: "44px 48px",
-            border: "1px solid #e0e9f2",
-            boxShadow: "0 4px 32px rgba(30,58,95,0.07)",
-          }}
-        >
+      {/* Main Content Area */}
+      <div className="max-w-4xl mx-auto px-6 py-16">
+        <div className="bg-white rounded-[2rem] border border-gray-200 p-8 md:p-12 shadow-xl shadow-slate-100/50">
           {children}
 
-          {/* Footer */}
-          <div
-            style={{
-              marginTop: "48px",
-              paddingTop: "28px",
-              borderTop: "1px solid #e0e9f2",
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-              alignItems: "center",
-              gap: "12px",
-            }}
-          >
-            <Link
-              to="/"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "6px",
-                padding: "10px 22px",
-                borderRadius: "50px",
-                background: "#1E3A5F",
-                color: "#fff",
-                fontWeight: 600,
-                fontSize: "0.85rem",
-                textDecoration: "none",
-              }}
-            >
+          {/* Footer Navigation Row */}
+          <div className="mt-12 pt-8 border-t border-gray-150 flex flex-wrap gap-4 items-center justify-between">
+            <Link to="/" className="btn-secondary !text-xs !px-5 !py-2.5">
               ← Back to Home
             </Link>
-
-            <a
-              href="mailto:info@nxtweavesolutions.com"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "6px",
-                padding: "10px 22px",
-                borderRadius: "50px",
-                border: "1px solid #e0e9f2",
-                color: "#556B7D",
-                fontWeight: 500,
-                fontSize: "0.85rem",
-                textDecoration: "none",
-              }}
-            >
+            <a href="mailto:info@nxtweavesolutions.com" className="text-xs font-semibold text-text-slate-paragraph hover:text-royal-blue transition-colors">
               📩 Questions? Email Us
             </a>
           </div>
@@ -169,61 +49,21 @@ function LegalLayout({ title, subtitle, icon, children }) {
 // Shared Components
 function Section({ number, title, children }) {
   return (
-    <div style={{ marginBottom: "36px" }}>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "12px",
-          marginBottom: "12px",
-        }}
-      >
-        <div
-          style={{
-            width: "30px",
-            height: "30px",
-            borderRadius: "50%",
-            background: "linear-gradient(135deg,#1E3A5F,#2FA4C7)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "#fff",
-            fontSize: "0.72rem",
-            fontWeight: 700,
-          }}
-        >
+    <div className="mb-10">
+      <div className="flex items-center gap-3.5 mb-4">
+        <div className="w-7 h-7 rounded-full bg-gradient-to-br from-royal-blue to-accent-cyan flex items-center justify-center text-white font-bold text-xs">
           {number}
         </div>
-
-        <h2
-          style={{
-            fontFamily: "'Playfair Display',serif",
-            color: "#1E3A5F",
-            fontWeight: 700,
-            fontSize: "1.05rem",
-            margin: 0,
-          }}
-        >
-          {title}
-        </h2>
+        <h2 className="text-base font-bold text-text-slate-primary font-display">{title}</h2>
       </div>
-
-      <div style={{ paddingLeft: "42px" }}>{children}</div>
+      <div className="pl-10">{children}</div>
     </div>
   );
 }
 
 function Para({ children }) {
   return (
-    <p
-      style={{
-        color: "#556B7D",
-        fontSize: "0.88rem",
-        lineHeight: 1.85,
-        fontWeight: 300,
-        marginBottom: "10px",
-      }}
-    >
+    <p className="text-xs text-text-slate-paragraph font-medium leading-relaxed mb-3.5">
       {children}
     </p>
   );
@@ -231,53 +71,11 @@ function Para({ children }) {
 
 function BulletList({ items }) {
   return (
-    <ul
-      style={{
-        listStyle: "none",
-        padding: 0,
-        margin: "10px 0 0",
-        display: "flex",
-        flexDirection: "column",
-        gap: "8px",
-      }}
-    >
+    <ul className="space-y-2 mt-3 mb-5 pl-1">
       {items.map((item, i) => (
-        <li
-          key={i}
-          style={{
-            display: "flex",
-            alignItems: "flex-start",
-            gap: "10px",
-          }}
-        >
-          <span
-            style={{
-              width: "18px",
-              height: "18px",
-              borderRadius: "50%",
-              background: "rgba(47,164,199,0.12)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "#2FA4C7",
-              fontSize: "9px",
-              fontWeight: 700,
-              marginTop: "2px",
-            }}
-          >
-            ✓
-          </span>
-
-          <span
-            style={{
-              color: "#556B7D",
-              fontSize: "0.86rem",
-              lineHeight: 1.72,
-              fontWeight: 300,
-            }}
-          >
-            {item}
-          </span>
+        <li key={i} className="flex gap-2.5 items-start text-xs text-text-slate-paragraph font-medium leading-relaxed">
+          <span className="text-royal-blue flex-shrink-0 mt-0.5">✓</span>
+          <span>{item}</span>
         </li>
       ))}
     </ul>
@@ -286,41 +84,14 @@ function BulletList({ items }) {
 
 function InfoBox({ type = "info", children }) {
   const styles = {
-    warning: {
-      bg: "rgba(255,165,0,0.08)",
-      border: "rgba(255,165,0,0.25)",
-      color: "#92400e",
-    },
-    success: {
-      bg: "rgba(76,175,80,0.08)",
-      border: "rgba(76,175,80,0.25)",
-      color: "#14532d",
-    },
+    warning: "bg-amber-50 border-amber-200 text-amber-900",
+    success: "bg-emerald-50 border-emerald-250 text-emerald-900",
+    info: "bg-blue-50 border-blue-200 text-royal-blue",
   };
-
-  const s = styles[type];
-
+  const theme = styles[type] || styles.info;
   return (
-    <div
-      style={{
-        background: s.bg,
-        border: `1px solid ${s.border}`,
-        borderRadius: "12px",
-        padding: "14px 18px",
-        marginTop: "12px",
-      }}
-    >
-      <p
-        style={{
-          color: s.color,
-          fontSize: "0.84rem",
-          lineHeight: 1.75,
-          fontWeight: 400,
-          margin: 0,
-        }}
-      >
-        {children}
-      </p>
+    <div className={`p-4 rounded-xl border text-xs font-medium leading-relaxed mt-4 ${theme}`}>
+      {children}
     </div>
   );
 }

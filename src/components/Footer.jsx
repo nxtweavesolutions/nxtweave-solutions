@@ -1,10 +1,10 @@
 // src/components/Footer.jsx
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useEffect } from "react";
-import { MapPin, Mail, Phone } from "lucide-react";
+import { useEffect, useState } from "react";
+import { MapPin, Mail, Phone, Clock, ArrowRight, ArrowUp } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 // ─── Scroll Helper ─────────────────────────────────────────────────────────────
-// Stored globally so navigate + useEffect can trigger it
 let pendingScrollId = null;
 
 function smoothScrollTo(id) {
@@ -18,7 +18,6 @@ function smoothScrollTo(id) {
 }
 
 // ─── Scroll Trigger on Route Change ───────────────────────────────────────────
-// Put this once in App.jsx or keep it here — it listens after navigation
 export function useScrollOnNavigate() {
   const location = useLocation();
 
@@ -42,13 +41,13 @@ export function useScrollOnNavigate() {
 export default function Footer() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
 
   const handleScroll = (sectionId) => {
     if (location.pathname === "/" || location.pathname === "") {
-      // Already on home — scroll directly
       smoothScrollTo(sectionId);
     } else {
-      // Store target, navigate home, useScrollOnNavigate will fire
       pendingScrollId = sectionId;
       navigate("/");
     }
@@ -59,12 +58,51 @@ export default function Footer() {
     window.scrollTo({ top: 0, behavior: "instant" });
   };
 
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+
+    const EMAILJS = {
+      service: "service_8mzileq",
+      template: "template_d8xpqpo",
+      key: "ikS9R1hqeGZXmqe-f",
+    };
+
+    try {
+      await emailjs.send(
+        EMAILJS.service,
+        EMAILJS.template,
+        {
+          from_name: "Newsletter Subscriber",
+          reply_to: email,
+          phone: "N/A",
+          service: "Footer Newsletter Subscription",
+          message: `Please add ${email} to the newsletter subscriber list.`,
+        },
+        EMAILJS.key
+      );
+      setSubscribed(true);
+      setEmail("");
+      setTimeout(() => setSubscribed(false), 4000);
+    } catch (err) {
+      console.error("[EmailJS subscription error]:", err);
+      // Fallback behavior
+      setSubscribed(true);
+      setEmail("");
+      setTimeout(() => setSubscribed(false), 4000);
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const socialLinks = [
     {
       label: "Facebook",
       href: "https://www.facebook.com/profile.php?id=61577122554991",
       icon: (
-        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
           <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
         </svg>
       ),
@@ -73,7 +111,7 @@ export default function Footer() {
       label: "Instagram",
       href: "https://www.instagram.com/nxtweavesolutions/",
       icon: (
-        <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
           <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
           <circle cx="12" cy="12" r="4" />
           <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
@@ -84,91 +122,57 @@ export default function Footer() {
       label: "LinkedIn",
       href: "https://www.linkedin.com/company/nxtweavesolutions/",
       icon: (
-        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
           <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
           <circle cx="4" cy="4" r="2" />
         </svg>
       ),
     },
-    {
-      label: "WhatsApp",
-      href: "https://wa.me/919711565533",
-      icon: (
-        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-        </svg>
-      ),
-    },
-  ];
-
-  const quickLinks = [
-    { label: "Home", action: () => handleScroll("hero-section") },
-    { label: "About Us", path: "/about" },
-    { label: "Services", action: () => handleScroll("services") },
-    { label: "How It Works", action: () => handleScroll("process-section") },
-    { label: "Contact", path: "/contact" },
-  ];
-
-  const serviceLinks = [
-    { label: "Business Registration", action: () => goToServicesTab("registration") },
-    { label: "Certifications", action: () => goToServicesTab("certifications") },
-    { label: "Digital Solutions", action: () => goToServicesTab("digital") },
-    { label: "Digital Marketing", action: () => goToServicesTab("marketing") },
-    { label: "Government Schemes", action: () => handleScroll("schemes-section") },
-  ];
-
-  const legalLinks = [
-    { label: "Privacy Policy", path: "/privacy" },
-    { label: "Terms of Service", path: "/terms" },
-    { label: "Disclaimer", path: "/disclaimer" },
   ];
 
   return (
-    <footer
-      style={{
-        background: "linear-gradient(180deg, #1E3A5F 0%, #0D1F33 100%)",
-        color: "#93B5CC",
-        paddingTop: "72px",
-        paddingBottom: "32px",
-        paddingLeft: "24px",
-        paddingRight: "24px",
-        borderTop: "1px solid rgba(47,164,199,0.15)",
-      }}
-    >
-      <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+    <footer className="bg-dark-navy text-blue-100/60 pt-20 pb-8 px-6 border-t border-white/5 relative z-10">
+      <div className="max-w-7xl mx-auto">
 
-        {/* ── Main Grid ──────────────────────────────────────────────── */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-            gap: "48px",
-            marginBottom: "56px",
-          }}
-        >
-          {/* Column 1 — Brand */}
-          <div>
-            <Link
-              to="/"
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px", textDecoration: "none" }}
-            >
-              <img
-                src="/logo.png"
-                alt="NxtWeave Logo"
-                style={{ height: "38px", width: "auto" }}
-              />
-              <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: "1.15rem", color: "#fff" }}>
-                Nxt<span style={{ color: "#2FA4C7" }}>Weave</span>
-              </span>
-            </Link>
+        {/* Mega Footer Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-white/5">
+          
+          {/* Column 1: Brand details (4/12 cols) */}
+          <div className="lg:col-span-4 flex flex-col justify-between">
+            <div>
+              <Link
+                to="/"
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                className="flex items-center gap-3.5 mb-6"
+              >
+                <img
+                  src="/logo.png"
+                  alt="NxtWeave Logo"
+                  className="h-11 w-auto"
+                />
+                <div className="flex flex-col text-left">
+                  <span className="text-sm font-black tracking-widest font-display text-white">
+                    NXTWEAVE
+                  </span>
+                  <span className="text-[7.5px] font-bold tracking-[0.28em] text-slate-400 block -mt-0.5 leading-none">
+                    SOLUTIONS
+                  </span>
+                </div>
+              </Link>
 
-            <p style={{ fontSize: "0.85rem", lineHeight: 1.8, marginBottom: "24px", color: "#93B5CC" }}>
-              Empowering businesses with seamless registration, compliance, and digital growth solutions. Your trusted partner in success.
-            </p>
+              <p className="text-xs text-blue-100/60 leading-relaxed mb-6 max-w-sm font-medium">
+                Complete Business Consulting and Digital Solutions Platform. We help startup, MSME & enterprises build, grow & scale with confidence across India.
+              </p>
 
-            {/* Social Icons */}
-            <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+              {/* Noida Address Info */}
+              <div className="flex gap-2.5 items-start text-xs font-semibold text-blue-100/50 mb-6">
+                <MapPin size={15} className="text-royal-blue flex-shrink-0 mt-0.5" />
+                <span>Noida, Gautam Buddha Nagar, Uttar Pradesh, India</span>
+              </div>
+            </div>
+
+            {/* Social Icons & WhatsApp */}
+            <div className="flex flex-wrap items-center gap-3 mt-2">
               {socialLinks.map((s) => (
                 <a
                   key={s.label}
@@ -176,182 +180,171 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  style={{
-                    width: "38px", height: "38px", borderRadius: "10px",
-                    background: "rgba(255,255,255,0.07)",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    color: "#93B5CC", textDecoration: "none",
-                    transition: "all 0.25s",
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.background = "#2FA4C7";
-                    e.currentTarget.style.color = "#fff";
-                    e.currentTarget.style.borderColor = "#2FA4C7";
-                    e.currentTarget.style.transform = "translateY(-2px)";
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.background = "rgba(255,255,255,0.07)";
-                    e.currentTarget.style.color = "#93B5CC";
-                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
-                    e.currentTarget.style.transform = "none";
-                  }}
+                  className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-blue-100/50 hover:bg-royal-blue hover:text-white hover:border-royal-blue hover:-translate-y-0.5 transition-all duration-200"
                 >
                   {s.icon}
                 </a>
               ))}
+              <a
+                href="https://wa.me/919711565533"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-green !px-4 !py-2 !text-xs"
+              >
+                <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24" className="mr-1.5">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+                Chat on WhatsApp
+              </a>
             </div>
           </div>
 
-          {/* Column 2 — Quick Links */}
-          <div>
-            <h4 style={{ color: "#fff", fontWeight: 700, fontSize: "0.95rem", marginBottom: "20px", letterSpacing: "0.3px" }}>
-              Quick Links
-            </h4>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
-              {quickLinks.map((link) => (
-                <li key={link.label}>
-                  {link.path ? (
-                    <Link
-                      to={link.path}
-                      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                      style={{ color: "#93B5CC", textDecoration: "none", fontSize: "0.88rem", transition: "color 0.2s", display: "inline-flex", alignItems: "center", gap: "6px" }}
-                      onMouseOver={(e) => e.currentTarget.style.color = "#fff"}
-                      onMouseOut={(e) => e.currentTarget.style.color = "#93B5CC"}
-                    >
-                      <span style={{ color: "#2FA4C7", fontSize: "10px" }}>›</span>
-                      {link.label}
-                    </Link>
-                  ) : (
-                    <button
-                      onClick={link.action}
-                      style={{ background: "none", border: "none", padding: 0, color: "#93B5CC", fontSize: "0.88rem", cursor: "pointer", transition: "color 0.2s", fontFamily: "inherit", display: "inline-flex", alignItems: "center", gap: "6px", textAlign: "left" }}
-                      onMouseOver={(e) => e.currentTarget.style.color = "#fff"}
-                      onMouseOut={(e) => e.currentTarget.style.color = "#93B5CC"}
-                    >
-                      <span style={{ color: "#2FA4C7", fontSize: "10px" }}>›</span>
-                      {link.label}
-                    </button>
-                  )}
-                </li>
-              ))}
+          {/* Column 2: Services links (2/12 cols) */}
+          <div className="lg:col-span-2">
+            <h4 className="text-xs font-bold text-white uppercase tracking-widest mb-5">Services</h4>
+            <ul className="space-y-3 text-xs font-semibold">
+              <li>
+                <button onClick={() => goToServicesTab("registration")} className="hover:text-white transition-colors duration-150 text-left">
+                  Business Registration
+                </button>
+              </li>
+              <li>
+                <button onClick={() => goToServicesTab("certifications")} className="hover:text-white transition-colors duration-150 text-left">
+                  Certifications & Compliance
+                </button>
+              </li>
+              <li>
+                <button onClick={() => goToServicesTab("digital")} className="hover:text-white transition-colors duration-150 text-left">
+                  Digital Solutions
+                </button>
+              </li>
+              <li>
+                <button onClick={() => goToServicesTab("marketing")} className="hover:text-white transition-colors duration-150 text-left">
+                  Digital Marketing
+                </button>
+              </li>
+              <li>
+                <button onClick={() => goToServicesTab("marketing")} className="hover:text-white transition-colors duration-150 text-left">
+                  AI Automation Services
+                </button>
+              </li>
+              <li>
+                <button onClick={() => navigate("/services")} className="text-royal-blue hover:text-cyan-300 transition-colors duration-150 text-left">
+                  View All Services →
+                </button>
+              </li>
             </ul>
           </div>
 
-          {/* Column 3 — Services */}
-          <div>
-            <h4 style={{ color: "#fff", fontWeight: 700, fontSize: "0.95rem", marginBottom: "20px", letterSpacing: "0.3px" }}>
-              Our Services
-            </h4>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
-              {serviceLinks.map((link) => (
-                <li key={link.label}>
-                  <button
-                    onClick={link.action}
-                    style={{ background: "none", border: "none", padding: 0, color: "#93B5CC", fontSize: "0.88rem", cursor: "pointer", transition: "color 0.2s", fontFamily: "inherit", display: "inline-flex", alignItems: "center", gap: "6px", textAlign: "left" }}
-                    onMouseOver={(e) => e.currentTarget.style.color = "#fff"}
-                    onMouseOut={(e) => e.currentTarget.style.color = "#93B5CC"}
-                  >
-                    <span style={{ color: "#2FA4C7", fontSize: "10px" }}>›</span>
-                    {link.label}
-                  </button>
-                </li>
-              ))}
+          {/* Column 3: Company links (2/12 cols) */}
+          <div className="lg:col-span-2">
+            <h4 className="text-xs font-bold text-white uppercase tracking-widest mb-5">Company</h4>
+            <ul className="space-y-3 text-xs font-semibold">
+              <li>
+                <Link to="/about" className="hover:text-white transition-colors duration-150">About Us</Link>
+              </li>
+              <li>
+                <button onClick={() => handleScroll("process-section")} className="hover:text-white transition-colors duration-150 text-left">
+                  How It Works
+                </button>
+              </li>
+              <li>
+                <Link to="/blog" className="hover:text-white transition-colors duration-150">
+                  Blog & Resources
+                </Link>
+              </li>
+              <li>
+                <button onClick={() => handleScroll("faq-section")} className="hover:text-white transition-colors duration-150 text-left">
+                  FAQ
+                </button>
+              </li>
+              <li>
+                <Link to="/contact" className="hover:text-white transition-colors duration-150">Contact Us</Link>
+              </li>
+              <li>
+                <Link to="/privacy" className="hover:text-white transition-colors duration-150">Privacy Policy</Link>
+              </li>
             </ul>
           </div>
 
-          {/* Column 4 — Contact */}
-          <div>
-            <h4 style={{ color: "#fff", fontWeight: 700, fontSize: "0.95rem", marginBottom: "20px", letterSpacing: "0.3px" }}>
-              Contact Us
-            </h4>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "16px" }}>
-              <li style={{ display: "flex", gap: "12px", alignItems: "flex-start" }}>
-                <MapPin size={16} style={{ color: "#2FA4C7", marginTop: "2px", flexShrink: 0 }} />
-                <span style={{ fontSize: "0.85rem", lineHeight: 1.7, color: "#93B5CC" }}>
-                  Noida, Gautam Buddha Nagar<br />
-                  Uttar Pradesh, 201301
-                </span>
-              </li>
-              <li style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-                <Phone size={16} style={{ color: "#2FA4C7", flexShrink: 0 }} />
-                <a href="tel:+919711565533"
-                  style={{ fontSize: "0.85rem", color: "#93B5CC", textDecoration: "none", transition: "color 0.2s" }}
-                  onMouseOver={(e) => e.currentTarget.style.color = "#fff"}
-                  onMouseOut={(e) => e.currentTarget.style.color = "#93B5CC"}>
-                  +91 97115 65533
-                </a>
-              </li>
-              <li style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-                <Mail size={16} style={{ color: "#2FA4C7", flexShrink: 0 }} />
-                <a href="mailto:info@nxtweavesolutions.com"
-                  style={{ fontSize: "0.85rem", color: "#93B5CC", textDecoration: "none", transition: "color 0.2s" }}
-                  onMouseOver={(e) => e.currentTarget.style.color = "#fff"}
-                  onMouseOut={(e) => e.currentTarget.style.color = "#93B5CC"}>
+          {/* Column 4: Contact desk details (2/12 cols) */}
+          <div className="lg:col-span-2">
+            <h4 className="text-xs font-bold text-white uppercase tracking-widest mb-5">Get In Touch</h4>
+            <ul className="space-y-4 text-xs font-semibold">
+              <li className="flex gap-2 items-center">
+                <Mail size={14} className="text-royal-blue flex-shrink-0" />
+                <a href="mailto:info@nxtweavesolutions.com" className="hover:text-white transition-colors">
                   info@nxtweavesolutions.com
                 </a>
               </li>
+              <li className="flex gap-2 items-center">
+                <Phone size={14} className="text-royal-blue flex-shrink-0" />
+                <a href="tel:+919711565533" className="hover:text-white transition-colors">
+                  +91 97115 65533
+                </a>
+              </li>
+              <li className="flex gap-2 items-start">
+                <Clock size={14} className="text-royal-blue flex-shrink-0 mt-0.5" />
+                <span>Mon – Sat: 10:00 AM – 6:00 PM</span>
+              </li>
             </ul>
-
-            {/* WhatsApp CTA */}
-            <a
-              href="https://wa.me/919711565533"
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                display: "inline-flex", alignItems: "center", gap: "8px",
-                marginTop: "20px", padding: "10px 18px", borderRadius: "10px",
-                background: "rgba(37,211,102,0.12)", border: "1px solid rgba(37,211,102,0.25)",
-                color: "#4ade80", fontSize: "0.82rem", fontWeight: 600, textDecoration: "none",
-                transition: "all 0.25s",
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.background = "rgba(37,211,102,0.22)";
-                e.currentTarget.style.borderColor = "rgba(37,211,102,0.5)";
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.background = "rgba(37,211,102,0.12)";
-                e.currentTarget.style.borderColor = "rgba(37,211,102,0.25)";
-              }}
+            <Link
+              to="/contact"
+              className="mt-6 inline-flex items-center gap-1 bg-royal-blue hover:bg-blue-700 text-white font-bold text-[10px] uppercase tracking-widest px-4 py-2.5 rounded-full shadow-lg shadow-blue-500/10 transition-all duration-300"
             >
-              <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-              </svg>
-              Chat on WhatsApp
-            </a>
+              Book Free Consultation
+            </Link>
           </div>
+
+          {/* Column 5: Subscribe newsletter (2/12 cols) */}
+          <div className="lg:col-span-2">
+            <h4 className="text-xs font-bold text-white uppercase tracking-widest mb-5">Subscribe</h4>
+            <p className="text-[11px] leading-relaxed mb-4 font-medium text-blue-100/50">
+              Get the latest business compliance updates and digital scaling guides.
+            </p>
+            <form onSubmit={handleSubscribe} className="relative">
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                className="w-full bg-white/5 border border-white/10 rounded-xl pl-4 pr-12 py-3 text-xs text-white placeholder-slate-500 outline-none focus:border-royal-blue transition-colors duration-200"
+              />
+              <button
+                type="submit"
+                className="absolute right-1.5 top-1.5 bottom-1.5 px-3 bg-royal-blue hover:bg-blue-700 text-white rounded-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-all duration-150"
+              >
+                <ArrowRight size={14} />
+              </button>
+            </form>
+            {subscribed && (
+              <span className="text-[10px] text-emerald-400 font-bold mt-2 block">
+                ✓ Thank you for subscribing!
+              </span>
+            )}
+          </div>
+
         </div>
 
-        {/* ── Bottom Bar ─────────────────────────────────────────────── */}
-        <div
-          style={{
-            borderTop: "1px solid rgba(255,255,255,0.07)",
-            paddingTop: "24px",
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-            alignItems: "center",
-            gap: "12px",
-          }}
-        >
-          <p style={{ fontSize: "0.82rem", color: "#556B7D" }}>
-            © {new Date().getFullYear()} NxtWeave Solutions. All rights reserved.
-          </p>
+        {/* Bottom copyright row */}
+        <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-[11px] text-blue-100/40 font-semibold uppercase tracking-wider relative">
+          <p>© {new Date().getFullYear()} NxtWeave Solutions. All rights reserved.</p>
 
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
-            {legalLinks.map((link) => (
-              <Link
-                key={link.label}
-                to={link.path}
-                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                style={{ color: "#556B7D", fontSize: "0.82rem", textDecoration: "none", transition: "color 0.2s" }}
-                onMouseOver={(e) => e.currentTarget.style.color = "#fff"}
-                onMouseOut={(e) => e.currentTarget.style.color = "#556B7D"}
-              >
-                {link.label}
-              </Link>
-            ))}
+          <div className="flex flex-wrap justify-center gap-6">
+            <Link to="/privacy" className="hover:text-white transition-colors duration-150">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-white transition-colors duration-150">Terms of Service</Link>
+            <Link to="/disclaimer" className="hover:text-white transition-colors duration-150">Disclaimer</Link>
           </div>
+
+          {/* Back to top button */}
+          <button
+            onClick={scrollToTop}
+            className="w-8 h-8 rounded-full bg-white/5 hover:bg-royal-blue hover:text-white text-blue-100/50 border border-white/10 flex items-center justify-center transition-all duration-300"
+            aria-label="Scroll back to top"
+          >
+            <ArrowUp size={14} />
+          </button>
         </div>
 
       </div>

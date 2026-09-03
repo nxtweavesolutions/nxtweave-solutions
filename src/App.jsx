@@ -8,6 +8,8 @@ import Home           from "./pages/Home";
 import Services       from "./pages/Services";
 import About          from "./pages/About";
 import Contact        from "./pages/Contact";
+import Blog           from "./pages/Blog";
+import BlogDetail     from "./pages/BlogDetail";
 import AdminLogin     from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 
@@ -24,6 +26,8 @@ import Disclaimer     from "./pages/Disclaimer";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar         from "./components/Navbar";
 import Footer         from "./components/Footer";
+import LeadPopup      from "./components/LeadPopup";
+import SEOStructuredData from "./components/SEOStructuredData";
 
 // ─── Brand colors ─────────────────────────────────────────────────────────────
 const C = {
@@ -273,8 +277,12 @@ function App() {
       {/* Scrolls to top on every route change (except pending section scrolls) */}
       <ScrollToTop />
 
+      {/* Global structured JSON-LD schemas for Search Engine Optimization */}
+      <SEOStructuredData />
+
       {/* ── Navbar ─────────────────────────────────────────────────────── */}
       {!isAdminRoute && <Navbar />}
+      {!isAdminRoute && <LeadPopup />}
 
       {/* ── Main content ───────────────────────────────────────────────── */}
       <main style={{ flex: 1 }}>
@@ -285,6 +293,8 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/about"    element={<About />}    />
           <Route path="/contact"  element={<Contact />}  />
+          <Route path="/blog"     element={<Blog />}     />
+          <Route path="/blog/:id" element={<BlogDetail />} />
 
           {/* ── Legal routes ─────────────────────────────────────────── */}
           <Route path="/privacy"    element={<PrivacyPolicy />}  />
